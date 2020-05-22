@@ -47,8 +47,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
-          path: dist
-          name: dist
+          path: ./
 
       - name: Downloaded files
         run: ls -R
@@ -58,7 +57,7 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Build Docker image
-        run: docker build --build-arg APP_FOLDER=dist --file ./Dockerfile --tag $CACHE_IMAGE:$IMAGE_TAG .
+        run: docker build --build-arg APP_FOLDER=artifact --file ./Dockerfile --tag $CACHE_IMAGE:$IMAGE_TAG .
 
       - name: Push image to Dockerhub
         run: docker push $CACHE_IMAGE:$IMAGE_TAG
