@@ -10,7 +10,7 @@ env:
   CACHE_IMAGE: steel8rat/cache
   IMAGE_TAG: ${{ github.sha }} # take commit sha as a image tag
 
-  K8S_CLUSTER_NAME: k8s-cache-dev
+  K8S_CLUSTER_NAME: k8s-cache
   K8S_CONFIG_FOLDER: do-k8s
 
 jobs:
@@ -61,3 +61,34 @@ jobs:
 
       - name: Push image to Dockerhub
         run: docker push $CACHE_IMAGE:$IMAGE_TAG
+
+      - name: Remove old artifacts
+        uses: c-hive/gha-remove-artifacts@v1
+        with:
+          age: '1 hour'
+
+  deploy_to_do:
+    needs:
+      - build_and_test
+      - build_docker_image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+
+      - name: Update api-server deployment file
+        run: sed -i 's|<TAG>|'${IMAGE_TAG}'|' $GITHUB_WORKSPACE/$K8S_CONFIG_FOLDER/api-server.yml
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save $K8S_CLUSTER_NAME
+
+      - name: Deploy to DigitalOcean Kubernetes
+        run: kubectl apply -f $GITHUB_WORKSPACE/$K8S_CONFIG_FOLDER
+
+      - name: Verify deployments
+        run: kubectl get deployments --output name | xargs -n1 kubectl rollout status
