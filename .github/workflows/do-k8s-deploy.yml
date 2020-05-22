@@ -32,3 +32,32 @@ jobs:
 
       - name: Test
         run: yarn run test
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          path: dist
+
+  build_node_image:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: dist
+
+      - name: Downloaded files
+        run: ls -R
+        working-directory: dist
+
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build --build-arg APP_FOLDER=dist --file ./Dockerfile --tag $CACHE_IMAGE:$IMAGE_TAG .
+
+      - name: Push image to Dockerhub
+        run: docker push $CACHE_IMAGE:$IMAGE_TAG
