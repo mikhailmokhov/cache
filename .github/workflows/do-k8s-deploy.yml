@@ -38,7 +38,7 @@ jobs:
         with:
           path: dist
 
-  build_node_image:
+  build_docker_image:
     needs: build_and_test
     runs-on: ubuntu-latest
     steps:
@@ -48,10 +48,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: dist
+          name: dist
 
       - name: Downloaded files
         run: ls -R
-        working-directory: dist
+        working-directory: ./
 
       - name: Login to DockerHub Registry
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
