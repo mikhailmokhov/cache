@@ -39,7 +39,7 @@ export default class Items {
     /**
      * Remove one tail element if map isn't empty
      */
-    public removeOldest(): void {
+    public removeLeastRecentlyAdded(): void {
         if (this.isEmpty()) return
         delete this.map[this.tail.key]
         console.log(`Removed oldest item ${this.tail.key}`)

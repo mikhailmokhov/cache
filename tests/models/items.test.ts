@@ -32,17 +32,17 @@ describe('calculate', function () {
         expect(items.contains("key1")).true
         expect(items.contains("key2")).true
         expect(items.contains("key3")).true
-        items.removeOldest()
+        items.removeLeastRecentlyAdded()
         expect(items.size()).equals(2)
         expect(items.contains("key1")).false
         expect(items.contains("key2")).true
         expect(items.contains("key3")).true
-        items.removeOldest()
+        items.removeLeastRecentlyAdded()
         expect(items.size()).equals(1)
         expect(items.contains("key1")).false
         expect(items.contains("key2")).false
         expect(items.contains("key3")).true
-        items.removeOldest()
+        items.removeLeastRecentlyAdded()
         expect(items.size()).equals(0)
         expect(items.contains("key1")).false
         expect(items.contains("key2")).false
@@ -98,12 +98,12 @@ describe('calculate', function () {
         expect(items.contains("key3")).false
         expect(items.contains("key1")).true
         expect(items.size()).equals(2)
-        items.removeOldest()
+        items.removeLeastRecentlyAdded()
         expect(items.contains("key2")).true
         expect(items.contains("key3")).false
         expect(items.contains("key1")).false
         expect(items.size()).equals(1)
-        items.removeOldest()
+        items.removeLeastRecentlyAdded()
         expect(items.toString()).equals('{empty}')
         expect(items.size()).equals(0)
     })

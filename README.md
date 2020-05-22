@@ -1,5 +1,5 @@
 # Cache Prototype
-A simple cache without a database support. The server maintains a key–value associative array of items (json objects). `MEMORY_LIMIT` setting allows to limit amount of memory that can be used by the server. When the limit is reached, subsequent inserts cause older data to be purged in least recently used order.
+A simple cache without a database support. The server maintains a key–value associative array of items (json objects). `MEMORY_LIMIT` setting allows to limit amount of memory that can be used by the server. When the limit is reached, subsequent inserts cause older data to be purged in **least recently added order**. The logic can be easily improved to purge items in **least recently used order**. 
 
 ## Install
 `yarn`
@@ -10,7 +10,7 @@ A simple cache without a database support. The server maintains a key–value as
 Access http://localhost:8080
 
 ## Settings
-`PORT` and `MEMORY_LIMIT` in `.env` file where memory limit corresponds to `process.memoryUsage().heapUsed` nodejs parameter. After `heapUsed` reaches `MEMORY_LIMIT` subsequent inserts will cause older data to be purged in least recently used order. If for some reason memory limit is reached, but cache has no items to remove (the cache is already empty), server will return 507 error.   
+`PORT` and `MEMORY_LIMIT` in `.env` file where memory limit corresponds to `process.memoryUsage().heapUsed` nodejs parameter. After `heapUsed` reaches `MEMORY_LIMIT` subsequent inserts will cause older data to be purged in least recently added order. If for some reason memory limit is reached, but cache has no items to remove (the cache is already empty), server will return 507 error.   
 
 
 ## Endpoints

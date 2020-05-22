@@ -37,7 +37,9 @@ export default class ItemsService {
     public add(data: object): string {
         if (this.memoryLimitReached()) {
             if (this.items.isEmpty()) return null
-            this.items.removeOldest()
+            // Currently least recently added order is used, can be optimized. For example, to least recently used (LRU),
+            // least frequently used (LFU) or least frequent recently used (LFRU).
+            this.items.removeLeastRecentlyAdded()
         }
         // This can be optimized by generating keys in advance when server is not too busy
         const key = this.generateUniqueKey()
