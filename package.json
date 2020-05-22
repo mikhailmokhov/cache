@@ -6,7 +6,7 @@
   "main": "index.ts",
   "scripts": {
     "dev": "nodemon --exec ts-node -- src/index.ts",
-    "prod": "npm run build && npm run start",
+    "prod": "yarn run build && yarn run start",
     "build": "tsc",
     "start": "node ./dist/index.js",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
