@@ -7,9 +7,9 @@ on:
       - master
 
 jobs:
-  - deploy:
-      name: Test
-      steps:
-      - name: Get properties
-        id: props
-        uses: ./github-actions/properties
+  deploy:
+    name: Test
+    steps:
+    - name: Get properties
+      id: props
+      uses: ./github-actions/properties
