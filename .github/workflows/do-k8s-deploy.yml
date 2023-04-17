@@ -4,7 +4,7 @@ name: Deploy to Digital Ocean Kubernetes
 on:
   push:
     branches:
-      #- master
+      - dev
 
 env:
   CACHE_IMAGE: steel8rat/cache
