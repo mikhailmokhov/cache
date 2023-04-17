@@ -8,8 +8,8 @@ on:
 
 jobs:
   deploy:
-    name: Test
+    runs-on: ubuntu-latest
     steps:
-    - name: Get properties
-      id: props
-      uses: ./github-actions/properties
+      - name: Get properties
+        id: props
+        uses: ./github-actions/properties
