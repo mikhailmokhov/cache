@@ -1,5 +1,5 @@
 
-name: Deploy to Digital Ocean Kubernetes
+name: Test action
 
 on:
   push:
