@@ -12,4 +12,4 @@ jobs:
     steps:
       - name: Get properties
         id: props
-        uses: ./github-actions/properties
+        uses: ./actions/properties
