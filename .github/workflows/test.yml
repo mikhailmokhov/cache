@@ -1,0 +1,12 @@
+
+name: Deploy to Digital Ocean Kubernetes
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  - name: Get properties
+    id: props
+    uses: ./github-actions/properties
