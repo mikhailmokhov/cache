@@ -1,0 +1,8 @@
+name: Properties
+description: gfdgfgh
+outputs:
+  tags:
+    description: Array of tags (from nx.json) for the project
+runs:
+  using: node16
+  main: index.js
