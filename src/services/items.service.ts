@@ -6,7 +6,6 @@ import Items from '../models/items.model'
 export default class ItemsService {
     private readonly items: Items
     private heapUsed: number
-
     constructor() {
         this.items = new Items()
         // Check memory state every ~5 sec
