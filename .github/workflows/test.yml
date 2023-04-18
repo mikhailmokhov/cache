@@ -23,3 +23,7 @@ jobs:
       - name: Get properties
         id: props
         uses: ./actions/properties
+
+      - name: Check condition
+        if: "contains(props.tags, 'scope:server')"
+        run: echo "Condition is true"
