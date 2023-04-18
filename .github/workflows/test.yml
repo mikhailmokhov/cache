@@ -25,5 +25,5 @@ jobs:
         uses: ./actions/properties
 
       - name: Check condition
-        #if: "contains(props.tags, 'scope:server')"
+        if: "contains(steps.props.tags, 'scope:server')"
         run: echo "Condition is true"
