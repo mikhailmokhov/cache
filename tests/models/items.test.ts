@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import Items from "../../src/models/items.model";
 
-
 // Items class should be tested to make sure it works as expected
 // console.log(items.toString()) can be used to see current list state
 
