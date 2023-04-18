@@ -25,7 +25,7 @@ jobs:
         uses: ./actions/properties
 
       - name: Echo tags
-        run: echo {{ steps.props.tags }}
+        run: echo ${{ steps.props.tags }}
 
       - name: Check condition
         if: "contains(join(',', steps.props.tags), 'scope:server')"
