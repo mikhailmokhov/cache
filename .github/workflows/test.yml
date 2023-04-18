@@ -28,5 +28,5 @@ jobs:
         run: echo ${{ steps.props.outputs.tags }}
 
       - name: Check condition
-        if: "contains(steps.props.outputs.tags, 'scope:server')"
+        if: "contains(steps.props.outputs.tags, 'scope:server') && contains(steps.props.outputs.tags, 'scope:server')"
         run: echo condition is true
